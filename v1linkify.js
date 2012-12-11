@@ -69,6 +69,9 @@
 			// to prefetch links to all of them. When false, only begins
 			// a link prefetch when the link is moused over.
 			prefetchAll: true,
+			// When true, strips all VersionOne's silly "collapsed-text" classes
+			// to show stuff instead of forcing expands.
+			stripCollapsedTextClasses: true,
 			// Returns a V1 search URL for the specified query.
 			getSearchUrl: function(query) {
 				return pathCombine(this.v1BaseUrl, this.searchPath.replace('#{query}', query));
@@ -185,6 +188,11 @@
 	function executeFind(node) {
 		findAndReplaceDOMText(config.issueIdRegex, node, createAnchor, 1, { exclusions: config.excludeSelectors });
 	};
+	function stripCollapsedTextClasses() {
+		if (config.stripCollapsedTextClasses) {
+			$('.collapsed-text').removeClass('collapsed-text');
+		}
+	};
 
 	function fetchAll() {
 		$('a.v1linkify_needs_prefetch').each(function() {
@@ -203,6 +211,7 @@
 	}
 
 	executeFind(document.body);
+	stripCollapsedTextClasses();
 
 	if (config.prefetchAll) {
 		fetchAll();
@@ -217,6 +226,7 @@
 				fetchAll();
 			}
 		}
+		stripCollapsedTextClasses();
 	});
 	observer.observe(document.body, { attributes: false, childList: true, subtree: true });
 
