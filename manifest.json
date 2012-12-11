@@ -1,0 +1,13 @@
+{
+  "name": "VersionOne Linkify",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Turns VersionOne issue identifiers in the form of [DB]-\\d{5} into clickable links to the referenced issue.",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["jquery.js", "findAndReplaceDOMText.js", "v1linkify.js"],
+      "css": ["style.css"]
+    }
+  ]
+}

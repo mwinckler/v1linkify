@@ -1,0 +1,33 @@
+<html>
+	<head>
+
+	</head>
+	<body>
+
+		<form id='optionsForm'>
+			<ul>
+				<li>
+					<label for="v1BaseUrl">
+						VersionOne installation URL:
+						<span class='hint'>This is the URL of the default main page without the page part. Example: <code>https://www8.v1host.com/MyExampleAccountName/</code></span>
+					</label>
+					<input type="text" id="v1BaseUrl" />
+				</li>
+				<li>
+					<label>
+						Prefetch all links on page load?
+						<span class='hint'>By default, this extension only loads VersionOne links when you mouse over an issue ID. Check this box to prefetch <em>all</em> links on page load. This may slow down the page initially.</span>
+					</label>
+					<input type="checkbox" id="prefetchAll" />
+				</li>
+				<li>
+					<label>
+						Exclusion selectors:
+						<span class='hint'>One per line, list CSS selectors inside which any issue IDs will <em>not</em> be replaced.</span>
+					</label>
+					<textarea rows="20" cols="60" id="exclusionSelectors"></textarea>
+			</ul>
+
+		</form>
+	</body>
+</html>
