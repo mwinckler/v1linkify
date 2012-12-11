@@ -182,9 +182,11 @@
 	};
 
 	// Linkify issue IDs with an anchor set to fetch the real URL of the issue.
-	findAndReplaceDOMText(config.issueIdRegex, document.body, createAnchor, 1, { exclusions: config.excludeSelectors });
+	function executeFind(node) {
+		findAndReplaceDOMText(config.issueIdRegex, node, createAnchor, 1, { exclusions: config.excludeSelectors });
+	};
 
-	if (config.prefetchAll) {
+	function fetchAll() {
 		$('a.v1linkify_needs_prefetch').each(function() {
 			var a = $(this);
 			a.addClass('v1linkify_fetching_permalink')
@@ -199,4 +201,23 @@
 			});
 		});
 	}
+
+	executeFind(document.body);
+
+	if (config.prefetchAll) {
+		fetchAll();
+	}
+
+	// Listen for future changes to the DOM
+	MutationObserver = window.WebKitMutationObserver;
+	var observer = new MutationObserver(function(mutations, ob) {
+		for (var i = 0; i < mutations.length; i++) {
+			executeFind(mutations[i].target);
+			if (config.prefetchAll) {
+				fetchAll();
+			}
+		}
+	});
+	observer.observe(document.body, { attributes: false, childList: true, subtree: true });
+
 })(jQuery);

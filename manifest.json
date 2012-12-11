@@ -3,6 +3,7 @@
   "version": "0.1",
   "manifest_version": 2,
   "description": "Turns VersionOne issue identifiers in the form of [DB]-\\d{5} into clickable links to the referenced issue.",
+  "options_page": "options.html",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
