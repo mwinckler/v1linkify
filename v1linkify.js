@@ -30,7 +30,7 @@
 			// The base URL of your VersionOne instance
 			v1BaseUrl: "https://www8.v1host.com/TrackAboutInc01/",
 			// A regex matching issue IDs to be searched for
-			issueIdRegex: /(\b[DB]-\d{5}\b)/gi,
+			issueIdRegex: /(\b(D|B|AT|E|R|I|AT)-\d{5}\b)/gi,
 			// The path to the V1 search page, relative to v1BaseUri
 			// #{query} will be replaced with the search term
 			searchPath: "Search.mvc/Advanced?q=#{query}",
@@ -113,7 +113,7 @@
 			                    $(this).attr('target','_self');
 			                    break;
 			                case 2:
-			                    // Middle mouse - this one attemps to navigate
+			                    // Middle mouse - this one attempts to navigate
 			                    // immediately on mousedown in a new tab
 			                    $(this).attr('target','_newtab');
 			                    break;
