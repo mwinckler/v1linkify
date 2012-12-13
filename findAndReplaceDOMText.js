@@ -19,7 +19,6 @@
  */
 window.findAndReplaceDOMText = (function() {
   var config = {
-    // TODO: define
     exclusions: []
   };
 

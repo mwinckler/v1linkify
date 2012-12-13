@@ -1,39 +1,85 @@
 <html>
 	<head>
-		<script type="text/javascript">
-			
-		</script>
+		<style>
+			body {
+				font: 14px Helvetica, Calibri, Arial, sans-serif;
+				background: #eee;
+				text-shadow: 1px 1px 1px #fff;
+
+			}
+			ul {
+				list-style-type: none;
+			}
+			li {
+				clear: left;
+			}
+			label {
+				display: block;
+				width: 250px;
+				float: left;
+				margin: 0 10px 40px 0;
+			}
+			span.hint {
+				display: block;
+				width: 250px;
+				float: left;
+				color: #777;
+				font-style: italic;
+				font-size: 12px;
+				border-top: 1px solid #aaa;
+				margin: 3px 20px 0 0;
+			}
+			em, strong {
+				font-weight: bold;
+			}
+			input, textarea { clear: right; }
+			input.long {
+				width: 400px;
+			}
+			textarea {
+				font-family: Monaco, Consolas, "Courier New", monospace;
+			}
+			input[type="submit"] {
+			}
+		</style>
+		<script src="jquery.js" type="text/javascript"></script>
+		<script src="config.js" type="text/javascript"></script>
+		<script src="options.js" type="text/javascript"></script>
 	</head>
 	<body>
+		<ul>
+			<li>
+				<label for="v1BaseUrl">
+					VersionOne installation URL:
+					<span class='hint'>This is the URL of the default main page without the page part. Example: <code>https://www8.v1host.com/MyExampleAccountName/</code></span>
+				</label>
+				<input type="text" id="v1BaseUrl" class="long" />
+			</li>
+			<li>
+				<label>
+					Prefetch all links on page load?
+					<span class='hint'>By default, this extension only loads VersionOne links when you mouse over an issue ID. Check this box to prefetch <em>all</em> links on page load. This may slow down the page initially.</span>
+				</label>
+				<input type="checkbox" id="prefetchAll" />
+			</li>
+			<li>
+				<label>
+					Exclusion selectors:
+					<span class='hint'>One per line, list CSS selectors inside which any issue IDs will <em>not</em> be replaced.</span>
+				</label>
+				<textarea rows="20" cols="60" id="excludeSelectors"></textarea>
+			</li>
+			<li>
+				<label>
+					Issue ID Regex:
+					<span class='hint'>Must contain at least one capture group (set of parentheses).</span>
+				</label>
+				<input type="text" id="issueIdRegex" />
+			</li>
 
-		<form id='optionsForm'>
-			<ul>
-				<li>
-					<label for="v1BaseUrl">
-						VersionOne installation URL:
-						<span class='hint'>This is the URL of the default main page without the page part. Example: <code>https://www8.v1host.com/MyExampleAccountName/</code></span>
-					</label>
-					<input type="text" id="v1BaseUrl" />
-				</li>
-				<li>
-					<label>
-						Prefetch all links on page load?
-						<span class='hint'>By default, this extension only loads VersionOne links when you mouse over an issue ID. Check this box to prefetch <em>all</em> links on page load. This may slow down the page initially.</span>
-					</label>
-					<input type="checkbox" id="prefetchAll" />
-				</li>
-				<li>
-					<label>
-						Exclusion selectors:
-						<span class='hint'>One per line, list CSS selectors inside which any issue IDs will <em>not</em> be replaced.</span>
-					</label>
-					<textarea rows="20" cols="60" id="exclusionSelectors"></textarea>
-				</li>
-				<li>
-					<input type="submit" value="Save" id="btnSave" />
-				</li>
-			</ul>
-
-		</form>
+			<li>
+				<button id="btnSave">Save</button>
+			</li>
+		</ul>
 	</body>
 </html>
