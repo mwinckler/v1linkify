@@ -68,7 +68,7 @@
 				                    $(this).attr('target','_self');
 				                    break;
 				                case 2:
-				                    // Middle mouse - this one attemps to navigate
+				                    // Middle mouse - this one attempts to navigate
 				                    // immediately on mousedown in a new tab
 				                    $(this).attr('target','_newtab');
 				                    break;

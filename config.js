@@ -16,7 +16,7 @@ var V1Linkify = {
 			// The base URL of your VersionOne instance
 			config.v1BaseUrl = localStorage["v1BaseUrl"];
 			// A regex matching issue IDs to be searched for	
-			config.issueIdRegex = localStorage["issueIdRegex"] || "(\b[DB]-\d{5}\b)";
+			config.issueIdRegex = localStorage["issueIdRegex"] || "(\b(D|B|AT|E|R|I|AT)-\d{5}\b)";
 			// The path to the V1 search page, relative to v1BaseUri
 			// #{query} will be replaced with the search term
 			config.searchPath = localStorage["searchPath"] || "Search.mvc/Advanced?q=#{query}";
