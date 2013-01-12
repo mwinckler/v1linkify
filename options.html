@@ -4,8 +4,10 @@
 			body {
 				font: 14px Helvetica, Calibri, Arial, sans-serif;
 				background: #eee;
-				text-shadow: 1px 1px 1px #fff;
-
+				text-shadow: 1px 1px 0px #fff;
+				width: 900px;
+				margin: 0 auto;
+				padding: 40px;
 			}
 			ul {
 				list-style-type: none;
@@ -23,11 +25,13 @@
 				display: block;
 				width: 250px;
 				float: left;
+				border-top: 1px solid #aaa;
+				font-size: 12px;
+				margin: 3px 20px 0 0;
+			}
+			.hint {
 				color: #777;
 				font-style: italic;
-				font-size: 12px;
-				border-top: 1px solid #aaa;
-				margin: 3px 20px 0 0;
 			}
 			em, strong {
 				font-weight: bold;
@@ -41,12 +45,28 @@
 			}
 			input[type="submit"] {
 			}
+			input.validation_error, textarea.validation_error, select.validation_error {
+				border: 1px solid #d00;
+			}
+			p.validation_error { 
+				border: 1px dashed #d00;
+				background: #fdd;
+				color: #d00;
+				margin: 0 0 0 260px;
+				padding: 5px;
+				text-shadow: 1px 1px 0px #333;
+			}
 		</style>
 		<script src="jquery.js" type="text/javascript"></script>
 		<script src="config.js" type="text/javascript"></script>
 		<script src="options.js" type="text/javascript"></script>
 	</head>
 	<body>
+		<h1>Linkify Extension for VersionOne</h1>
+		<h2>Basic Options</h2>
+
+		<p class='hint'>The <strong>VersionOne installation URL</strong> is the only option for which a value is required.</p>
+
 		<ul>
 			<li>
 				<label for="v1BaseUrl">
@@ -70,11 +90,24 @@
 				<textarea rows="20" cols="60" id="excludeSelectors"></textarea>
 			</li>
 			<li>
+				<label>Exclude domains:
+					<span class='hint'>One per line, list domains on which this extension will not run.</span>
+				</label>
+				<textarea rows="20" cols="60" id="excludeDomains"></textarea>
+			</li>
+		</ul>
+
+		<h2>Advanced Options</h4>
+
+		<p>Tinker here for more advanced customization of the extension.</p>
+
+		<ul>
+			<li>
 				<label>
 					Issue ID Regex:
 					<span class='hint'>Must contain at least one capture group (set of parentheses).</span>
 				</label>
-				<input type="text" id="issueIdRegex" />
+				<input type="text" id="issueIdRegex" class="long" />
 			</li>
 
 			<li>

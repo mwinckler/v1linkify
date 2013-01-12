@@ -9,6 +9,10 @@ var V1Linkify = {
 		// that anyway, plus migrations anytime structure changed.
 		var config = this;
 
+		// "Constants"
+		config.DEFAULT_BASE_URL = 'https://www8.v1host.com/YOUR_INSTANCE_NAME_HERE/';
+
+
 		/// Loads config values from localStorage.
 		config.reload = function() {
 			console.debug('[config.reload] Entry.', this);
@@ -59,6 +63,12 @@ var V1Linkify = {
 											]
 										: localStorage["excludeSelectors"].split('\n');
 
+			config.excludeDomains = localStorage["excludeDomains"] === undefined
+										? [
+											"mail.google.com"
+											]
+										: localStorage["excludeDomains"].split('\n');
+
 			// When true, identifies all issues on the page and attempts
 			// to prefetch links to all of them. When false, only begins
 			// a link prefetch when the link is moused over.
@@ -85,7 +95,7 @@ var V1Linkify = {
 	})()
 };
 
-
+// Listen for requests from the options script to retrieve the config object.
 chrome.extension.onMessage.addListener(
 	function(request, sender, sendResponse) {
 		console.debug(request);
