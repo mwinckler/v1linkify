@@ -188,7 +188,6 @@ $(document).ready(function() {
 		config.issueIdRegex = new RegExp(config.issueIdRegex, "gi");
 		var url = $.url();
 		if (config.excludeDomains.indexOf(url.attr('host')) > -1) {
-			alert('skipping domain');
 			// Do not run on this domain.
 			return;
 		}
