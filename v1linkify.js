@@ -113,32 +113,39 @@ var init = function($, config) {
 	/// issueId by calling up VersionOne's search page and grabbing the
 	/// first result.
 	function fetchPermalink(issueId, callback) {
-		$.ajax({
-			url: urlHelper.getSearchUrl(issueId),
-			type: "GET",
-			dataType:'xml',
-			xhrFields:{
-				withCredentials: true
-			},
-			success: function(data, textStatus, jqXHR) {
-				var link = $($('a.asset-number-link', data)[0]).attr('href');
-				if (link === undefined) {
-					// Fall back on search URL if no permalink found.
-					link = urlHelper.getSearchUrl(issueId); 
-				} else {
-					// Massage the permalink some more.
-					// V1 uses relative links that include the
-					// 'instance identifier' at the end of our base URL;
-					// strip it off and combine the base with the 
-					// remaining path.
-					link = urlHelper.pathCombine(config.v1BaseUrl, link.replace(/^\/[^\/]+/, ""));
-				}
-							
-				if ($.isFunction(callback)) {
-					callback(link)
-				}
+		var doneCallback = function(data, textStatus, jqXHR) {
+			var link = $($('a.asset-number-link', data)[0]).attr('href');
+			if (link === undefined) {
+				// Fall back on search URL if no permalink found.
+				link = urlHelper.getSearchUrl(issueId); 
+			} else {
+				// Massage the permalink some more.
+				// V1 uses relative links that include the
+				// 'instance identifier' at the end of our base URL;
+				// strip it off and combine the base with the 
+				// remaining path.
+				link = urlHelper.pathCombine(config.v1BaseUrl, link.replace(/^\/[^\/]+/, ""));
 			}
-		});
+						
+			if ($.isFunction(callback)) {
+				callback(link)
+			}
+		};
+
+		if (config.dryRun) {
+			// For testing purposes only. Don't perform any
+			// actual queries.
+			doneCallback('#', 'ok', null);
+		} else {
+			$.ajax({
+				url: urlHelper.getSearchUrl(issueId),
+				type: "GET",
+				dataType:'xml',
+				xhrFields:{
+					withCredentials: true
+				}
+			}).done(doneCallback);
+		}
 	};
 
 	// Linkify issue IDs with an anchor set to fetch the real URL of the issue.
@@ -192,6 +199,5 @@ $(document).ready(function() {
 			return;
 		}
 		setTimeout(function() { init(jQuery, config); }, 100);
-		  
 	});
 });

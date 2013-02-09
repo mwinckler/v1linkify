@@ -1,5 +1,5 @@
 var optionsPage = (function() {
-	var _config = V1Linkify.config;
+	var _config = loadConfig();
 	var _defaultBaseUrl = _config.DEFAULT_BASE_URL;
 
 	/// Checks the page for basic validation errors;
@@ -53,7 +53,6 @@ var optionsPage = (function() {
 	return {
 		// Saves options to localStorage.
 		saveOptions: function(e) {
-			console.debug('[optionsPage.saveOptions] Entry.', e);
 			// Do some basic validation on the entries.
 			var validationResult = _validate();
 			if (Object.keys(validationResult).length > 0) {
@@ -95,5 +94,8 @@ var optionsPage = (function() {
 
 $(document).ready(function() {
 	optionsPage.restoreOptions();
-	$('#btnSave').click(optionsPage.saveOptions);
+	$('#btnSave').click(function() { 
+		optionsPage.saveOptions();
+		window.close();
+	});
 });
